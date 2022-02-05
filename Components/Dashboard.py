@@ -58,7 +58,7 @@ dashboard =dbc.Card(
                             )
                         ]),
                         dbc.Row([
-                            dbc.Col(ch.drawFigure(),width=6),
+                            dbc.Col(ch.drawFigure2(),width=6),
                             dbc.Col(ch.drawFigure(),width=6)
                         ]
                         ,style={"margin":"10px"}
