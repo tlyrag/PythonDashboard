@@ -11,15 +11,59 @@ import Charts.charts as ch
 dashboard =dbc.Card(
                     dbc.CardBody([
                         dbc.Row([
-                            dbc.Col(html.H1('Valor 1'))
-                            ,dbc.Col(html.H1('Valor 2'))
-                            ,dbc.Col(html.H1('Valor 3'))
+                            dbc.Col(                            
+                                dbc.Card(
+                                [
+                                    dbc.CardHeader("This is the header"),
+                                    dbc.CardBody(
+                                        [
+                                            html.H4("Card title", className="card-title"),
+                                            html.P("This is some card text", className="card-text"),
+                                        ]
+                                    ),
+                                    dbc.CardFooter("This is the footer"),
+                                ],
+                                style={"width": "18rem"},
+                                )
+                            )
+                            ,dbc.Col(
+                                dbc.Card(
+                                [
+                                    dbc.CardHeader("This is the header"),
+                                    dbc.CardBody(
+                                        [
+                                            html.H4("Card title", className="card-title"),
+                                            html.P("This is some card text", className="card-text"),
+                                        ]
+                                    ),
+                                    dbc.CardFooter("This is the footer"),
+                                ],
+                                style={"width": "18rem"},
+                                )
+                            )
+                            ,dbc.Col(
+                                dbc.Card(
+                                [
+                                    dbc.CardHeader("This is the header"),
+                                    dbc.CardBody(
+                                        [
+                                            html.H4("Card title", className="card-title"),
+                                            html.P("This is some card text", className="card-text"),
+                                        ]
+                                    ),
+                                    dbc.CardFooter("This is the footer"),
+                                ],
+                                style={"width": "18rem"},
+                                )
+                            )
                         ]),
                         dbc.Row([
-                            dbc.Col(ch.drawFigure()),
-                            dbc.Col(ch.drawFigure())
-                        ]),
-                            dbc.Row(children=ch.drawFigure()),
-                    ]
-                    )
+                            dbc.Col(ch.drawFigure(),width=6),
+                            dbc.Col(ch.drawFigure(),width=6)
+                        ]
+                        ,style={"margin":"10px"}
+                        ),
+                        dbc.Row(children=ch.drawFigure()),
+                    ])
+                ,style={"height":"100%"}
                 )
