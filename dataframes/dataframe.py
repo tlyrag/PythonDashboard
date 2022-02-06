@@ -38,3 +38,16 @@ df2 = px.data.election_geojson()
 #print(df.keys())
 #print(df[0])
 #print(df2['features'][0])
+
+############################## Creating sub datasets ########################################
+
+#print(df.winner.unique())
+df_total_votes = pd.DataFrame({
+    'name':['Joly', 'Coderre' ,'Bergeron'],
+    'total_votes':[df.Joly.sum(),df.Coderre.sum(),df.Bergeron.sum()],
+    'total_percentage':[round(df.Joly.sum()/df.total.sum(),2),round(df.Coderre.sum()/df.total.sum(),2),round(df.Bergeron.sum()/df.total.sum(),2)],
+    'total_winner_district':df.winner.value_counts()
+})
+print(df_total_votes)
+
+
