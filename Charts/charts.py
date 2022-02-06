@@ -17,7 +17,7 @@ def drawFigure():
             dbc.CardBody([
                 dcc.Graph(
                     figure=px.bar(
-                        df.df_teste, x="district", y="total", color="winner"
+                        df.df, x="district", y="total", color="winner"
                     ).update_layout(
                         template='plotly_dark',
                         plot_bgcolor= 'rgba(0, 0, 0, 0)',
@@ -35,9 +35,9 @@ def drawFigure2():
     return dcc.Graph(
     figure={
         'data': [
-            {'x': df.df_test_top5.district , 'y': df.df_test_top5.Joly, 'type': 'bar', 'name': 'Joly'},
-            {'x': df.df_test_top5.district , 'y': df.df_test_top5.Bergeron, 'type': 'bar', 'name': 'Bergeron'},
-            {'x': df.df_test_top5.district , 'y': df.df_test_top5.Coderre, 'type': 'bar', 'name': 'Coderre'},
+            {'x': df.df_top5.district , 'y': df.df_top5.Joly, 'type': 'bar', 'name': 'Joly'},
+            {'x': df.df_top5.district , 'y': df.df_top5.Bergeron, 'type': 'bar', 'name': 'Bergeron'},
+            {'x': df.df_top5.district , 'y': df.df_top5.Coderre, 'type': 'bar', 'name': 'Coderre'},
         ],
         'layout': {
             'title': 'Dash Data Visualization'

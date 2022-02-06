@@ -13,7 +13,7 @@ nav= [
                 dbc.ListGroupItem(html.H5('Filter',style={"justify-align":"center"})),
                 dbc.ListGroupItem(
                     dcc.Checklist(
-                        data.df_teste.columns
+                        data.df.columns
                     )
                 ),
                 dbc.ListGroupItem('News'),
