@@ -8,8 +8,7 @@ import pandas as pd
 import plotly.graph_objects as go
 import Charts.charts as ch
 
-dashboard =dbc.Card(
-                    dbc.CardBody([
+dashboard = dbc.Container([
                         dbc.Row([
                             dbc.Col(                            
                                 dbc.Card(
@@ -23,7 +22,7 @@ dashboard =dbc.Card(
                                     ),
                                     dbc.CardFooter("This is the footer"),
                                 ],
-                                style={"width": "18rem"},
+                                style={"width": "18rem","margin-left":"70px"},
                                 )
                             )
                             ,dbc.Col(
@@ -38,7 +37,7 @@ dashboard =dbc.Card(
                                     ),
                                     dbc.CardFooter("This is the footer"),
                                 ],
-                                style={"width": "18rem"},
+                                style={"width": "18rem","margin-left":"50px"},
                                 )
                             )
                             ,dbc.Col(
@@ -53,17 +52,16 @@ dashboard =dbc.Card(
                                     ),
                                     dbc.CardFooter("This is the footer"),
                                 ],
-                                style={"width": "18rem"},
+                                style={"width": "18rem","margin-left":"50px"},
                                 )
                             )
                         ]),
                         dbc.Row([
-                            dbc.Col(ch.drawFigure2(),width=6),
-                            dbc.Col(ch.drawFigure(),width=6)
+                            dbc.Col(ch.totalPercentage(),width=4),
+                            dbc.Col(ch.totalVotes(),width=4),
+                            dbc.Col(ch.totalDistrict(),width=4),
                         ]
                         ,style={"margin":"10px"}
                         ),
                         dbc.Row(ch.drawFigure4()),
                     ])
-                ,style={"height":"100%"}
-                )

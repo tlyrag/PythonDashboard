@@ -34,7 +34,7 @@ app.layout = html.Div(
             dbc.Row(
                 dbc.Col(
                     html.Div(dbc.Card(dbc.CardBody(header.header)))
-                    ,width=12
+                    ,width=12,style={"margin-bottom":"10px"}
                 )
             ),
             dbc.Row(

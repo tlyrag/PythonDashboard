@@ -48,6 +48,6 @@ df_total_votes = pd.DataFrame({
     'total_percentage':[round(df.Joly.sum()/df.total.sum(),2),round(df.Coderre.sum()/df.total.sum(),2),round(df.Bergeron.sum()/df.total.sum(),2)],
     'total_winner_district':df.winner.value_counts()
 })
-print(df_total_votes)
+#print(df_total_votes)
 
 
