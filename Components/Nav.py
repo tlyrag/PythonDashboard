@@ -3,7 +3,15 @@ from dash import dcc
 from dash import html
 from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
-import dataframes.dataframe as data
+from pandas import DataFrame
+import dataframes.dataframe as df
+
+
+
+
+district_list = []
+for district in df.df.district:
+    district_list.append(district)
 
 nav= [
     html.Div([
@@ -13,10 +21,15 @@ nav= [
                 dbc.ListGroupItem(html.H5('Filter',style={"justify-align":"center"})),
                 dbc.ListGroupItem(
                     dcc.Checklist(
-                        data.df.columns
                     )
                 ),
-                dbc.ListGroupItem('News'),
+                dcc.Dropdown(
+                    options=[{"label":dist, "value":dist} for dist in district_list],
+                    value = 'Select District',
+                    id ='location',
+                    style={'color':'black'},
+                    placeholder='Select District'
+                ),
                 dbc.ListGroupItem('Logout'),
             ])
         )
@@ -24,3 +37,5 @@ nav= [
     ,style={"justify-content": "space-between"}
     )
 ]
+
+

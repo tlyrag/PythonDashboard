@@ -8,8 +8,6 @@ from dash import dcc
 from dash import html
 from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
-import plotly.express as px
-import pandas as pd
 import plotly.graph_objects as go
 import plotly.express as px
 import pandas as pd
@@ -18,6 +16,7 @@ import pandas as pd
 import Components.Header as header
 import Components.Nav as nav
 import Components.Dashboard as dashboard
+import dataframes.dataframe as df
 
 
 
@@ -33,7 +32,9 @@ app.layout = html.Div(
         [
             dbc.Row(
                 dbc.Col(
-                    html.Div(dbc.Card(dbc.CardBody(header.header)))
+                    html.Div(dbc.Card(dbc.CardBody(
+                        header.header
+                    )))
                     ,width=12,style={"margin-bottom":"10px"}
                 )
             ),
@@ -42,7 +43,9 @@ app.layout = html.Div(
                     dbc.Col(
                         html.Div(
                             dbc.Card(
-                                dbc.CardBody(nav.nav)
+                                dbc.CardBody(
+                                    nav.nav
+                                    )
                                 ,style={"height":"100vh"}
                             )
                         )
@@ -50,16 +53,43 @@ app.layout = html.Div(
                     ),
                     dbc.Col(
                         html.Div(
-                            [dashboard.dashboard]
+                            [
+                                dashboard.dashboard,
+                                dcc.Input(id='my-input', value='initial value', type='text'),
+                                html.Div(id='my-output'),
+                            ]
                         )
                     ,width=10),
                 ],
             ),
         ]
     ,style={"height":"100vh"}
+    
     )
 
-
+@app.callback(
+    [
+        Output(component_id='card1', component_property='children'),
+        Output(component_id='card2', component_property='children'),
+        Output(component_id='card3', component_property='children'),
+    ],
+    [
+        Input(component_id='location', component_property='value')
+    ]
+)
+def update_output_div(input_value):
+    if input_value == 'Select District':
+        return (
+            "Winner : " + str(df.df_total_votes['name'][1]),
+            "Votes : " + str(df.df_total_votes['total_votes'][1]),
+            "Percentage : " + str(df.df_total_votes['total_percentage'][1])
+        )
+    else:
+        return (
+            "Winner : " + df.df[df.df['district'] == input_value].winner
+            ,"Votes : " + df.df[df.df['district'] == input_value].winner_votes
+            ,"Percentage : " + df.df[df.df['district'] == input_value].winner_percentage
+        )
 
 if __name__ == '__main__':
     app.run_server(debug=True)

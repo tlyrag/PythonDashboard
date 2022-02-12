@@ -7,7 +7,9 @@ import json
 ################################ Working with data election ###################################
 df = px.data.election()
 df_top5 = df.head()
-
+df = df.sort_values(by=['district_id'])
+##df['state_id']= df['district'].str.split('-', expand = True)[0]
+##print(df)
 ## Possible Columns winner_percentage, winner_votes, candidate_percentage, 
 ## Adding Columns to dataframe
 df['Coderre_percentage'] = round(df.Coderre/df.total,2)
@@ -48,6 +50,7 @@ df_total_votes = pd.DataFrame({
     'total_percentage':[round(df.Joly.sum()/df.total.sum(),2),round(df.Coderre.sum()/df.total.sum(),2),round(df.Bergeron.sum()/df.total.sum(),2)],
     'total_winner_district':df.winner.value_counts()
 })
+#print(df[df['district'] == '94-Jeanne-Sauvé'].winner_votes)
 #print(df_total_votes)
-
+#print(df)
 

@@ -22,7 +22,6 @@ def totalVotes():
                         labels ={"name":"Candidates","total_votes":"Total Votes", "name":""},
                         width=400,
                         height=400
-
                     ).update_layout(
                         title_x=0.2,
                         template='plotly_dark',
@@ -55,7 +54,7 @@ def totalDistrict():
                         title = "Total District Wins per candidate",
                         labels ={"name":"Candidates","total_winner_district":"District Wins", "name":""},
                         width=400,
-                        height=400
+                        height=400,
                     ).update_layout(
                         title_x=0.14,
                         template='plotly_dark',
@@ -86,7 +85,7 @@ def totalPercentage():
                         df.df_total_votes, names="name", values="total_percentage",color="name",
                         title = "Total Percentage per candidate",
                         width=380,
-                        height=400
+                        height=400,
                     ).update_layout(
                         template='plotly_dark',
                         plot_bgcolor= 'rgba(0, 0, 0, 0)',
@@ -144,3 +143,6 @@ def drawFigure4():
             ])
         ),  
     ])
+
+
+#####################Iteractive Functions
