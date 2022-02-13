@@ -27,6 +27,7 @@ external_stylesheets = [dbc.themes.DARKLY]
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 
+
 # assume you have a "long-form" data frame
 # see https://plotly.com/python/px-arguments/ for more options
 # =============================================================
@@ -36,7 +37,7 @@ app.layout = html.Div(
             dbc.Row(
                 dbc.Col(
                     html.Div(dbc.Card(dbc.CardBody(
-                        header.header
+                        header.header('John Doe')
                     )))
                     ,width=12,style={"margin-bottom":"10px"}
                 )
@@ -58,8 +59,6 @@ app.layout = html.Div(
                         html.Div(
                             [
                                 dashboard.dashboard,
-                                dcc.Input(id='my-input', value='initial value', type='text'),
-                                html.Div(id='my-output'),
                             ]
                         )
                     ,width=10),
@@ -67,6 +66,7 @@ app.layout = html.Div(
             ),
         ]
     ,style={"height":"100vh"}
+    ,id ='testando'
     
     )
 
@@ -104,6 +104,15 @@ def update_output_div(input_value):
             ,ch.update_district_percentage_chart(input_value)
   
         )
+
+
+# @app.callback(
+#     [Output('mapa','children')],
+#     [Input('themes','value')]
+# )
+# def change_theme(theme):
+#     print(theme)
+#     return ch.drawFigure4(theme)
 
 if __name__ == '__main__':
     app.run_server(debug=True)

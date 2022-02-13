@@ -61,6 +61,8 @@ dashboard = dbc.Container([
         ]
             ,style={"margin":"10px"}
         ),
-        dbc.Row(ch.drawFigure4()),
+        dbc.Row(
+            ch.drawFigure4('plotly_dark'),
+        ),
         ])
 

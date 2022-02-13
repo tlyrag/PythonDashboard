@@ -72,7 +72,7 @@ def totalPercentage():
  #   return px.choropleth_mapbox(df.df, locations = 'district_id', geojson=df.df2, color='total', color_continuous_scale='Redor',hover_data={'total': True})
 
 
-def drawFigure4():
+def drawFigure4(theme):
     return  html.Div([
         dbc.Card(
             dbc.CardBody([
@@ -84,9 +84,9 @@ def drawFigure4():
                         labels={"winner":"Candidates"},
                         hover_data = {"Coderre_percentage": True, "Joly_percentage":True,"Bergeron_percentage":True},
                         color_continuous_scale="Redor",
-                        opacity=0.7
+                        opacity=0.7,
                     ).update_layout(
-                        template='plotly_dark',
+                        template=theme,
                         plot_bgcolor= 'rgba(0, 0, 0, 0)',
                         paper_bgcolor= 'rgba(0, 0, 0, 0)',
                         mapbox_style="carto-darkmatter",
