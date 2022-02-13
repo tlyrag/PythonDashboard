@@ -11,12 +11,15 @@ import dash_bootstrap_components as dbc
 import plotly.graph_objects as go
 import plotly.express as px
 import pandas as pd
+import time
+
 
 ##### Importing Folders
 import Components.Header as header
 import Components.Nav as nav
 import Components.Dashboard as dashboard
 import dataframes.dataframe as df
+import Charts.charts as ch
 
 
 
@@ -72,6 +75,8 @@ app.layout = html.Div(
         Output(component_id='card1', component_property='children'),
         Output(component_id='card2', component_property='children'),
         Output(component_id='card3', component_property='children'),
+        Output(component_id='vote_chart',component_property='figure'),
+        Output(component_id='percentage_chart',component_property='figure')
     ],
     [
         Input(component_id='location', component_property='value')
@@ -79,16 +84,25 @@ app.layout = html.Div(
 )
 def update_output_div(input_value):
     if input_value == 'Select District':
+        time.sleep(0.1)
         return (
             "Winner : " + str(df.df_total_votes['name'][1]),
             "Votes : " + str(df.df_total_votes['total_votes'][1]),
-            "Percentage : " + str(df.df_total_votes['total_percentage'][1])
+            "Percentage : " + str(df.df_total_votes['total_percentage'][1]),
+            ch.total_votes_chart,
+            ch.total_percentage_chart
+
+            
         )
     else:
+        time.sleep(0.1)
         return (
             "Winner : " + df.df[df.df['district'] == input_value].winner
             ,"Votes : " + df.df[df.df['district'] == input_value].winner_votes
             ,"Percentage : " + df.df[df.df['district'] == input_value].winner_percentage
+            ,ch.update_district_votes_chart(input_value)
+            ,ch.update_district_percentage_chart(input_value)
+  
         )
 
 if __name__ == '__main__':

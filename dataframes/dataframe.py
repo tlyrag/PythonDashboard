@@ -21,9 +21,9 @@ df['winner_votes'] = np.where((df.winner =='Coderre'), df.Coderre,
                      np.where((df.winner == 'Joly'), df.Joly, 
                      'No Change')))
 
-df['winner_percentage'] =   np.where((df.winner =='Coderre'), round(df.Coderre/df.total,2), 
-                            np.where((df.winner == 'Bergeron'), round(df.Bergeron/df.total,2), 
-                            np.where((df.winner == 'Joly'), round(df.Joly/df.total,2), 
+df['winner_percentage'] =   np.where((df.winner =='Coderre'), round(100*df.Coderre/df.total), 
+                            np.where((df.winner == 'Bergeron'), round(100*df.Bergeron/df.total), 
+                            np.where((df.winner == 'Joly'), round(100*df.Joly/df.total), 
                             'No Change')))
 #print(df)
 
@@ -47,10 +47,29 @@ df2 = px.data.election_geojson()
 df_total_votes = pd.DataFrame({
     'name':['Joly', 'Coderre' ,'Bergeron'],
     'total_votes':[df.Joly.sum(),df.Coderre.sum(),df.Bergeron.sum()],
-    'total_percentage':[round(df.Joly.sum()/df.total.sum(),2),round(df.Coderre.sum()/df.total.sum(),2),round(df.Bergeron.sum()/df.total.sum(),2)],
+    'total_percentage':[
+         round(df.Joly.sum()*100/df.total.sum())
+        ,round(df.Coderre.sum()*100/df.total.sum())
+        ,round(df.Bergeron.sum()*100/df.total.sum())
+    ],
     'total_winner_district':df.winner.value_counts()
 })
 #print(df[df['district'] == '94-Jeanne-Sauvé'].winner_votes)
 #print(df_total_votes)
-#print(df)
+#print(df['winner_percentage'])
+df_district_votes = []
+def df_district_constructor(district):
+    
+    df_district = df[df['district']== district]
+    
+    df_district_votes = pd.DataFrame({
+        'name':['Joly', 'Coderre' ,'Bergeron'],
+        'total_votes':[df_district.Joly.sum(),df_district.Coderre.sum(),df_district.Bergeron.sum()],
+        'total_percentage':[df_district.Joly_percentage.sum(),df_district.Coderre_percentage.sum(),df_district.Bergeron_percentage.sum()]
+    })
+
+    return df_district_votes
+
+
+
 

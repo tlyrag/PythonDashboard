@@ -1,4 +1,5 @@
 ##### Importing Libs
+from re import A
 import dash
 from dash import dcc
 from dash import html
@@ -15,30 +16,8 @@ def totalVotes():
     return  html.Div([
         dbc.Card(
             dbc.CardBody([
-                dcc.Graph(
-                    figure=px.bar(
-                        df.df_total_votes, x="name", y="total_votes", color="name",
-                        title="Total Votes per candidate",
-                        labels ={"name":"Candidates","total_votes":"Total Votes", "name":""},
-                        width=400,
-                        height=400
-                    ).update_layout(
-                        title_x=0.2,
-                        template='plotly_dark',
-                        plot_bgcolor= 'rgba(0, 0, 0, 0)',
-                        paper_bgcolor= 'rgba(0, 0, 0, 0)',
-                        legend=dict(
-                                orientation="h",
-                                yanchor="bottom",
-                                y=1.02,
-                                xanchor="right",
-                                x=1.02
-                        ),
-                    ),
-                    config={
-                        'displayModeBar': False
-                        
-                    }
+                dcc.Loading(
+                    dcc.Graph(id='vote_chart')
                 ) 
             ])
         ),  
@@ -80,29 +59,10 @@ def totalPercentage():
     return  html.Div([
         dbc.Card(
             dbc.CardBody([
-                dcc.Graph(
-                    figure=px.pie(
-                        df.df_total_votes, names="name", values="total_percentage",color="name",
-                        title = "Total Percentage per candidate",
-                        width=380,
-                        height=400,
-                    ).update_layout(
-                        template='plotly_dark',
-                        plot_bgcolor= 'rgba(0, 0, 0, 0)',
-                        paper_bgcolor= 'rgba(0, 0, 0, 0)',
-                        title_x=0.15,
-                        legend=dict(
-                            
-                            orientation="h",
-                            yanchor="bottom",
-                            y=1.02,
-                            xanchor="right",
-                            x=1.02
-                        ),
-                    ),
-                    config={
-                        'displayModeBar': False
-                    }
+                dcc.Loading(
+                    dcc.Graph(
+                        id ='percentage_chart'
+                    )
                 ) 
             ])
         ),  
@@ -146,3 +106,91 @@ def drawFigure4():
 
 
 #####################Iteractive Functions
+total_votes_chart = px.bar(
+                    df.df_total_votes, x="name", y="total_votes", color="name",
+                    title="Total Votes per candidate",
+                    labels ={"name":"Candidates","total_votes":"Total Votes", "name":""},
+                    width=400,
+                    height=400
+                ).update_layout(
+                    title_x=0.2,
+                    template='plotly_dark',
+                    plot_bgcolor= 'rgba(0, 0, 0, 0)',
+                    paper_bgcolor= 'rgba(0, 0, 0, 0)',
+                    legend=dict(
+                        orientation="h",
+                        yanchor="bottom",
+                        y=1.02,
+                        xanchor="right",
+                        x=1.02
+                    ),
+                )               
+
+total_percentage_chart = figure=px.pie(
+                            df.df_total_votes, names="name", values="total_percentage",color="name",
+                            title = "Total Percentage per candidate",
+                            width=380,
+                            height=400,
+                        ).update_layout(
+                            template='plotly_dark',
+                            plot_bgcolor= 'rgba(0, 0, 0, 0)',
+                            paper_bgcolor= 'rgba(0, 0, 0, 0)',
+                            title_x=0.15,
+                            legend=dict(
+                                orientation="h",
+                                yanchor="bottom",
+                                y=1.02,
+                                xanchor="right",
+                                x=1.02
+                            )
+                        )
+
+def update_district_votes_chart(district):
+    df_district_votes = df.df_district_constructor(district)
+    #print(df_district_votes['name'])
+    #print(df_district_votes['total_votes'])
+    total_votes_district_chart = px.bar(
+                                    df_district_votes, x="name", y="total_votes", color="name",
+                                    title="Total Votes per candidate",
+                                    labels ={"name":"Candidates","total_votes":"Total Votes", "name":""},
+                                    width=400,
+                                    height=400
+                                ).update_layout(
+                                    title_x=0.2,
+                                    template='plotly_dark',
+                                    plot_bgcolor= 'rgba(0, 0, 0, 0)',
+                                    paper_bgcolor= 'rgba(0, 0, 0, 0)',
+                                    legend=dict(
+                                    orientation="h",
+                                    yanchor="bottom",
+                                    y=1.02,
+                                    xanchor="right",
+                                    x=1.02
+                                ),
+)
+    return total_votes_district_chart
+
+def update_district_percentage_chart(district):
+    df_district_votes = df.df_district_constructor(district)
+    total_percentage_chart =px.pie(
+                                df_district_votes, names="name", values="total_percentage",color="name",
+                                title = "Total Percentage per candidate",
+                                width=380,
+                                height=400,
+                            ).update_layout(
+                                template='plotly_dark',
+                                plot_bgcolor= 'rgba(0, 0, 0, 0)',
+                                paper_bgcolor= 'rgba(0, 0, 0, 0)',
+                                title_x=0.15,
+                                legend=dict(
+                                    orientation="h",
+                                    yanchor="bottom",
+                                    y=1.02,
+                                    xanchor="right",
+                                    x=1.02
+                                )
+                            )
+    return total_percentage_chart
+
+
+
